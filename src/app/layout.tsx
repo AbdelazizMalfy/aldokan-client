@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,24 +19,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <header>
-        <nav>
-          <a href="/">Home</a> | 
-          <a href="/about">About</a> | 
-          <a href="/services">Services</a> | 
-          <a href="/contact">Contact</a>
-        </nav>
-      </header> */}
+      <head></head>
+      <body>
+        <div className={`${inter.className} flex flex-col min-h-screen`}>
+          <header>
+            <NavBar />
+          </header>
+          <main className="flex-grow">
+            <div className="p-4 md:px-40">{children}</div>
+          </main>
 
-      {/* <main className={inter.className}> */}
-      <body className={inter.className}>
-        <div className="p-4 md:px-40">{children}</div>
+          <Footer />
+        </div>
       </body>
-      {/* </main> */}
-      {/* 
-      <footer>
-        <p>© 2023 My Next App</p>
-      </footer> */}
     </html>
   );
 }
