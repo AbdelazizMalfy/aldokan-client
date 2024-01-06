@@ -2,17 +2,26 @@
 
 import axios from 'axios';
 import React, { useState, useRef } from 'react'; // Import useRef
+import { useAuth } from '../context/authContext';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
+
+interface ModelRef {
+  current: HTMLDialogElement | null;
+}
 
 const LoginBtn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const modalRef = useRef(null); // Create a ref for the modal
+  const modalRef: ModelRef = useRef<HTMLDialogElement>(null);
+  const { setIsLoggedIn } = useAuth();
 
   const closeModal = () => {
-    modalRef.current?.close(); // Use the ref to close the modal
+    modalRef.current?.close();
   };
 
-  const handleLogin = async (event: any) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
@@ -23,17 +32,30 @@ const LoginBtn = () => {
       console.log('Login successful:', response);
       localStorage.setItem('accessToken', response.data.access_token);
       localStorage.setItem('refreshToken', response.data.refresh_token);
+      setIsLoggedIn(true);
       setEmail('');
       setPassword('');
-      closeModal(); // Close the modal on successful login
+      closeModal();
     } catch (error) {
       console.error('An error occurred during login:', error);
     }
   };
 
-  const handleOutsideClick = (event) => {
+  // const handlLoginWithGoogle = async () => {
+  //   window.location.href = `${process.env.NEXT_PUBLIC_API}/api/auth/google`;
+  // try {
+  //   const response = await axios.post(
+  //     `${process.env.NEXT_PUBLIC_API}/api/auth/google`,
+  //   );
+  //   console.log('Login successful:', response);
+  // } catch (error) {
+  //   console.error('An error occurred during login:', error);
+  // }
+  // };
+
+  const handleOutsideClick = (event: React.MouseEvent) => {
     if (event.target === modalRef.current) {
-      closeModal(); // Close the modal if clicked outside of the modal box
+      closeModal();
     }
   };
 
@@ -49,7 +71,7 @@ const LoginBtn = () => {
         id="my_modal_1"
         className="modal"
         ref={modalRef}
-        onClick={handleOutsideClick} // Attach the click listener
+        onClick={handleOutsideClick}
       >
         <div className="modal-box">
           <form onSubmit={handleLogin}>
@@ -93,6 +115,31 @@ const LoginBtn = () => {
               </button>
             </div>
           </form>
+          {/* <GoogleOAuthProvider
+            clientId={process.env.NEXT_PUBLIC_CLIENT_ID as string}
+          >
+            <div className="my-5">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log('response =>', credentialResponse);
+                  // const details = jwt_decode(credentialResponse.credential);
+                  // console.log(details);
+                }}
+                theme="outline"
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+                // login_uri={`${process.env.NEXT_PUBLIC_API}/api/auth/google`}
+                // redirect_uri={`${process.env.NEXT_PUBLIC_API}/api/auth/google/callback`}
+              />
+            </div>
+          </GoogleOAuthProvider> */}
+          {/* <button className="google-btn" onClick={() => handlLoginWithGoogle()}>
+            <div className="google-icon-wrapper">GOOGLE</div>
+            <p className="btn-text">
+              <b>Sign in with Google</b>
+            </p>
+          </button> */}
         </div>
       </dialog>
     </>

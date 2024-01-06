@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Product } from '../categories/[id]/page';
+import { Product } from '../app/categories/[id]/page';
 // import Image from 'next/image';
 
 interface Props {

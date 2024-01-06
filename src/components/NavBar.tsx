@@ -1,9 +1,20 @@
+'use client';
+
 import React from 'react';
 import LoginBtn from './LoginBtn';
 import Link from 'next/link';
+import { useAuth } from '../context/authContext';
 
 const NavBar = () => {
-  const isLoggedIn = false;
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -75,7 +86,7 @@ const NavBar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={() => logout()}>Logout</a>
               </li>
             </ul>
           </div>
