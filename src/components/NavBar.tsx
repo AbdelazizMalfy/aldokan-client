@@ -3,15 +3,16 @@
 import React from 'react';
 import LoginBtn from './LoginBtn';
 import Link from 'next/link';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
+import { useUser } from '@/context/UserContext';
 
 const NavBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { user } = useUser();
 
   const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-
     setIsLoggedIn(false);
   };
 
@@ -66,10 +67,15 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                {/* TODO: add user avatar component to return default avatar if not found */}
+                {user?.avatar ? (
+                  <img alt="Avatar" src={user.avatar} />
+                ) : (
+                  <img
+                    alt="Avatar"
+                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                )}
               </div>
             </div>
             <ul
