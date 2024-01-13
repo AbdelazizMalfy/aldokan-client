@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoriesList from '../components/CategoriesList';
+import CategoriesList from './_components/CategoriesList';
 
 const HomePage = async () => {
   return (

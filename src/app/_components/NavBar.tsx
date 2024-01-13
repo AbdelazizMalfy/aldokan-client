@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import LoginBtn from './LoginBtn';
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext';
-import { useUser } from '@/context/UserContext';
+import { useAuth } from '../_context/AuthContext';
+import { useUser } from '@/app/_context/UserContext';
+import LoginBtn from '../login/_components/LoginBtn';
 
 const NavBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
@@ -17,10 +17,10 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar px-8 text-primary text-xl shadow-md">
       <div className="flex-1">
-        <Link href={'/'} className="btn btn-ghost text-xl">
-          ITSTAZA
+        <Link href={'/'} className="text-xl">
+          <strong>ITSTAZA</strong>
         </Link>
       </div>
       <div className="flex-none">

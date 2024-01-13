@@ -35,8 +35,8 @@ const CategoriesList = () => {
 
   return (
     <div>
-      <p>Categories</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <p className="text-xl">Categories</p>
+      <div className="w-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-around">
         {categories.map((category: Category) => (
           <CategoryCard
             key={category.id}
