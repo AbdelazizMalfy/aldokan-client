@@ -7,6 +7,7 @@ import CategoryCard from './CategoryCard';
 interface Category {
   id: number;
   name: string;
+  image: string;
 }
 
 const CategoriesList = () => {
@@ -40,8 +41,9 @@ const CategoriesList = () => {
         {categories.map((category: Category) => (
           <CategoryCard
             key={category.id}
-            categoryName={category.name}
+            name={category.name}
             id={category.id}
+            image={category.image}
           />
         ))}
       </div>

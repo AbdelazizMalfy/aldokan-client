@@ -17,6 +17,7 @@ export interface Product {
   price: number;
   unitType: number;
   weightPerUnit?: string;
+  image: string;
 }
 
 const CategoryProducts = ({ params }: Params) => {
@@ -54,7 +55,7 @@ const CategoryProducts = ({ params }: Params) => {
   }
 
   return (
-    <div>
+    <div className="w-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-around">
       {categoryProducts.map((product: Product) => {
         return <ProductCard key={product.id} product={product} />;
       })}

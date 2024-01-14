@@ -2,22 +2,25 @@
 
 import Link from 'next/link';
 import { FC } from 'react';
+import Image from 'next/image';
 
 interface Props {
-  categoryName: string;
   id: number;
+  name: string;
+  image: string;
 }
 
-const CategoryCard: FC<Props> = ({ id, categoryName }) => {
+const CategoryCard: FC<Props> = ({ id, name, image }) => {
   return (
     <Link href={`/categories/${id}`}>
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title">{categoryName}</h2>
+          <h2 className="card-title">{name}</h2>
         </div>
         <figure>
           <img
-            src="https://res.akamaized.net/domain/image/fetch/t_web/https://static.domain.com.au/twr/production/uploads/content-watched/818292_Large.jpg"
+            style={{ width: '300px', height: '200px' }}
+            src={image}
             alt="Fruits"
           />
         </figure>

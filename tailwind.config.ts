@@ -13,10 +13,6 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      colors: {
-        primary: '#014037',
-        secondary: '#dce0cf',
-      },
     },
   },
   plugins: [require('daisyui')],
@@ -24,8 +20,9 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-          primary: '#014037',
-          secondary: '#dce0cf',
+          primary: '#048b5b',
+          'primary-content': '#FFF',
+          secondary: '#FFF',
         },
       },
     ],

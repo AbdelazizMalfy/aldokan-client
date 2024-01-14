@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '../_context/AuthContext';
 import { useUser } from '@/app/_context/UserContext';
 import LoginBtn from '../login/_components/LoginBtn';
+import Image from 'next/image';
 
 const NavBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
@@ -17,10 +18,10 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar px-8 text-primary text-xl shadow-md">
-      <div className="flex-1">
+    <div className="navbar px-8 bg-secondary text-primary text-xl shadow-md">
+      <div className="flex-1 btn-circle btn-ghost">
         <Link href={'/'} className="text-xl">
-          <strong>ITSTAZA</strong>
+          <Image width="140" height="140" src="/logo-custom.png" alt="logo" />
         </Link>
       </div>
       <div className="flex-none">
