@@ -47,7 +47,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
 
-    const fetchData = async () => {
+    const getCurrentUser = async () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/api/users/current`,
         {
@@ -59,7 +59,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
       setUser(response.data);
     };
 
-    fetchData();
+    getCurrentUser();
   }, []);
 
   return (

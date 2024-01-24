@@ -1,9 +1,8 @@
 'use client';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
-
+import categoriesApis from '../_utils/CategoriesApis';
 interface Category {
   id: number;
   name: string;
@@ -17,9 +16,7 @@ const CategoriesList = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API}/api/categories`,
-        );
+        const response = await categoriesApis.getCategories();
         setCategories(response.data);
       } catch (e) {
         console.error(e);

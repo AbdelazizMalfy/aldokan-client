@@ -1,8 +1,8 @@
 'use client';
 
 import ProductCard from '@/app/_components/ProductCard';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import productsApis from '@/app/_utils/ProductsApis';
 
 interface Params {
   params: {
@@ -26,14 +26,12 @@ const CategoryProducts = ({ params }: Params) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchCategoryProducts = async () => {
+    const fetchProductsByCategory = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API
-          }/api/products/category/${encodeURIComponent(params.id)}`,
-        );
+        const response = await productsApis.getProductsByCategory({
+          id: params.id,
+        });
         setCategoryProducts(response.data);
       } catch (error) {
         console.error('An error occurred: ', error);
@@ -43,7 +41,7 @@ const CategoryProducts = ({ params }: Params) => {
       }
     };
 
-    fetchCategoryProducts();
+    fetchProductsByCategory();
   }, [params.id]);
 
   if (loading) {

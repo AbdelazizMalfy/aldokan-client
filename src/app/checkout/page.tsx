@@ -29,7 +29,6 @@ export default function App() {
           `${process.env.NEXT_PUBLIC_API}/api/payments/create-stripe-payment`,
           paymentData,
         );
-        console.log('response', response.data);
         setClientSecret(response.data);
       } catch (error) {
         console.log(error);
@@ -46,8 +45,6 @@ export default function App() {
     clientSecret,
     appearance,
   };
-
-  console.log('clientSecret', clientSecret);
 
   return (
     <div className="App">

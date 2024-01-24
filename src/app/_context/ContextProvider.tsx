@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { UserProvider } from './UserContext';
 import { AuthProvider } from './AuthContext';
+import { CartProvider } from './CartContext';
 
 interface ContextProviderProps {
   children: ReactNode;
@@ -9,7 +10,9 @@ interface ContextProviderProps {
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   return (
     <AuthProvider>
-      <UserProvider>{children}</UserProvider>
+      <UserProvider>
+        <CartProvider>{children}</CartProvider>
+      </UserProvider>
     </AuthProvider>
   );
 };

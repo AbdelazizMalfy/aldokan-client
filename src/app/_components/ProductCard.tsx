@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Product } from '../categories/[id]/page';
+import AddToCartBtn from './AddToCartBtn';
 // import Image from 'next/image';
 
 interface Props {
@@ -30,15 +31,7 @@ export default function ProductCard({ product }: Props) {
             <div>{product.name}</div>
             <div>{product.weightPerUnit && product.weightPerUnit}</div>
           </div>
-          <button
-            className="btn btn-primary btn-circle w-[50px]"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log('added to card');
-            }}
-          >
-            +
-          </button>
+          <AddToCartBtn productId={product.id} />
         </div>
       </Link>
     </div>

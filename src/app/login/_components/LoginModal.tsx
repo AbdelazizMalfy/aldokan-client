@@ -2,7 +2,7 @@
 
 import GoogleLoginButton from '@/app/_components/GoogleLoginButton';
 import { useAuth } from '@/app/_context/AuthContext';
-import axios from 'axios';
+import authApis from '@/app/_utils/AuthApis';
 import React, { FC, useRef, useState } from 'react';
 
 interface Props {
@@ -28,10 +28,7 @@ const LoginModal: FC<Props> = ({ id, onSuccess }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/auth/login`,
-        { email, password },
-      );
+      const response = await authApis.login({ email, password });
       localStorage.setItem('accessToken', response.data.access_token);
       localStorage.setItem('refreshToken', response.data.refresh_token);
       setIsLoggedIn(true);
@@ -41,7 +38,6 @@ const LoginModal: FC<Props> = ({ id, onSuccess }) => {
         onSuccess();
       }
       closeModal();
-
       //TODO: redirect to home page and show success message
     } catch (error) {
       console.error('An error occurred during login:', error);
